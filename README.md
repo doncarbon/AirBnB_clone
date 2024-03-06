@@ -1,14 +1,14 @@
 # 0x00. AirBnB clone - The console
 
 <p align="center">
-  <img src="https://github.com/doncarbon/AirBnB_clone/blob/master/images/hbnblogo.png?raw=true" alt="HolbertonBnB logo">
+  <img src="https://github.com/doncarbon/AirBnB_clone/blob/main/images/hbnblogo.png?raw=true" alt="HolbertonBnB logo">
 </p>
 
 <h1 align="center">HolbertonBnB</h1>
 <p align="center">An AirBnB clone.</p>
 
 <p align="center">
-  <img src="https://github.com/doncarbon/AirBnB_clone/raw/master/images/consolehbnb.png" alt="HolbertonBnB logo">
+  <img src="https://github.com/doncarbon/AirBnB_clone/blob/main/images/consolehbnb.png" alt="HolbertonBnB logo">
 </p>
 
 ## Project Description:
