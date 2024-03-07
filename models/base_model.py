@@ -5,22 +5,32 @@ Represent a Base class that defines all common attributes/methods for other clas
 import json
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
 	"""
 	Manage and define all common attributes/methods for other classes.
 	"""
-	def __init__(self):
+	def __init__(self, *args, **kwargs):
 		"""
 		Class constructor (initialization)
 
 		Args:
-			id (int): the id attribute of a class.
+			*args (args): New attribute values.
+			**kwargs (dict): New key/value pairs of attributes.
 		"""
-		self.id = uuid.uuid4()
-		self.created_at = datetime.now()
-		self.updated_at = datetime.now()
+		if kwargs:
+			for key, value in kwargs.items():
+				if key == "updated_at" or key == "created_at":
+					setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+				elif key != "__class__":
+					setattr(self, key, value)
+		else:
+			self.id = str(uuid.uuid4())
+			self.created_at = datetime.now()
+			self.updated_at = datetime.now()
+			models.storage.new(self)
 
 	def __str__(self):
 		"""
