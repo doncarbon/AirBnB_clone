@@ -3,8 +3,6 @@
 from models.base_model import BaseModel
 
 
-class City(BaseModel):
-	"""City class that's inherited from BaseModel."""
-	state_id = ""
+class Amenity(BaseModel):
+	"""Amenity class that's inherited from BaseModel."""
 	name = ""
-	
