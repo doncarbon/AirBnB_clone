@@ -170,11 +170,8 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
             return False
         if len(argl) == 3:
-            try:
-                type(eval(argl[2])) != dict
-            except NameError:
-                print("** value missing **")
-                return False
+            print("** value missing **")
+            return False
 
 
 if __name__ == '__main__':
