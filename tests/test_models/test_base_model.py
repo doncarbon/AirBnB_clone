@@ -12,8 +12,7 @@ from datetime import datetime
 from uuid import UUID
 
 
-
-class TestConsole(unittest.TestCase):
+class TestBaseModel(unittest.TestCase):
     """
     Test cases for the BaseModel class in models/base_model.py.
     """
@@ -151,8 +150,8 @@ class TestConsole(unittest.TestCase):
     def test_str(self):
         """Test str"""
         i = BaseModel()
-        self.assertEqual(str(i), '[{}] ({}) {}'.format('BaseModel', i.id,
-                        i.__dict__))
+        self.assertEqual(str(i), '[{}] ({}) {}'.format('BaseModel',
+                                                       i.id, i.__dict__))
 
     def test_todict(self):
         """BaseModel Class method test"""
