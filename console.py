@@ -173,6 +173,29 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return False
 
+    def default(self, arg):
+        """
+        Retrieve all instances of a class by
+        using: <class name>.method().
+        """
+        args_dict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "update": self.do_update,
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in args_dict.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return args_dict[command[0]](call)
+        print("*** Unknown syntax: {}".format(arg))
+        return False
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
