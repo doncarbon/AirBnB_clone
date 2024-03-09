@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """AirBnb Clone Console Module"""
-from cgi import parse
 import cmd
 import sys
 import json
@@ -15,6 +14,24 @@ from models.city import City
 from models.base_model import BaseModel
 from models.user import User
 from models import storage
+
+
+def parsing(arg):
+    curly_braces = re.search(r"\{(.*?)\}", arg)
+    brackets = re.search(r"\[(.*?)\]", arg)
+    if curly_braces is None:
+        if brackets is None:
+            return [i.strip(",") for i in split(arg)]
+        else:
+            lexer = split(arg[:brackets.span()[0]])
+            retl = [i.strip(",") for i in lexer]
+            retl.append(brackets.group())
+            return retl
+    else:
+        lexer = split(arg[:curly_braces.span()[0]])
+        retl = [i.strip(",") for i in lexer]
+        retl.append(curly_braces.group())
+        return retl
 
 
 class HBNBCommand(cmd.Cmd):
@@ -38,28 +55,22 @@ class HBNBCommand(cmd.Cmd):
         """Does nothing."""
         pass
 
-    def create(self, arg):
-        """Creates a new instance that's inherited from BaseModel."""
-        if len(arg) == 0:
-            print("** class name missing **")
-            return
-
     def do_create(self, arg):
         """
         Creates a new instance of BaseModel, saves it
         (to the JSON file) and prints the id.
         """
         if len(arg) == 0:
-            print("** class name missing **")
+            print('** class name missing **')
             return
-        new_line = None
+        new = None
         if arg:
-            arg_line = arg.split()
-            if len(arg_line) == 1:
+            arg_list = arg.split()
+            if len(arg_list) == 1:
                 if arg in self.classes.keys():
-                    new_line = self.classes[arg]()
-                    new_line.save()
-                    print(new_line.id)
+                    new = self.classes[arg]()
+                    new.save()
+                    print(new.id)
                 else:
                     print("** class doesn't exist **")
 
@@ -121,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all instances based
         or not on the class name. Ex: $ all BaseModel or $ all
         """
-        argl = parse(arg)
+        argl = parsing(arg)
         if len(argl) > 0 and argl[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
         else:
@@ -140,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
         (save the change into the JSON file).
         Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com
         """
-        argl = parse(arg)
+        argl = parsing(arg)
         objdict = storage.all()
 
         if len(argl) == 0:
