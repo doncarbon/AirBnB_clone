@@ -149,7 +149,8 @@ class HBNBCommand(cmd.Cmd):
         Updates an instance based on the class name and
         id by adding or updating attribute
         (save the change into the JSON file).
-        Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com
+        Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+            $ update BaseModel 2134-1234-2144 first_name "Alx Test"
         """
         argl = parsing(arg)
         objdict = storage.all()
