@@ -38,7 +38,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: left;
     position: relative;
 }
 
@@ -68,7 +67,7 @@
     border-radius: 4px;
     list-style: none;
     padding: 0px 0px 15px 0px;
-    margin: -15 50 50 50;
+    margin: -15px 50px 50px 50px;
     top: calc(80%);
     left: 0;
 }
